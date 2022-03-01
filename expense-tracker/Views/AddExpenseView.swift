@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct AddExpenseView: View {
+    @State var title:String = "";
+    @State var amount:String = "";
+    
     var body: some View {
-        Text("Add Expense View")
+        VStack {
+            TextField("Title", text: $title)
+                .padding(.horizontal)
+                .frame(height:55)
+                .background(Color(red: 236/255, green: 234/255, blue: 236/255))
+                .cornerRadius(10)
+            TextField("Amount", text: $title)
+                .padding(.horizontal)
+                .frame(height:55)
+                .background(Color(red: 236/255, green: 234/255, blue: 236/255))
+                .cornerRadius(10)
+        }.padding()
+      
     }
 }
 
