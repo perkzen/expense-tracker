@@ -23,9 +23,22 @@ struct AddExpenseView: View {
                 .frame(height:55)
                 .background(Color(red: 236/255, green: 234/255, blue: 236/255))
                 .cornerRadius(10)
+            Button(action: saveButtonPressed, label: {
+                Text("Add".uppercased())
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .font(.headline)
+                    .padding()
+                    .background(Color.accentColor)
+                    .cornerRadius(10)
+                    .foregroundColor(.white)
+            })
         }.padding()
       
     }
+}
+
+func saveButtonPressed () {
+    print("hello")
 }
 
 struct AddExpenseView_Previews: PreviewProvider {

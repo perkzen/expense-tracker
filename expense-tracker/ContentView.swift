@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var store:Store = Store()
+    
     var body: some View {
         TabView{
             ExpenseListView()
@@ -20,7 +22,7 @@ struct ContentView: View {
                     Image(systemName: "plus.circle.fill")
                     Text("Add expense")
                 }
-        }
+        }.environmentObject(store)
     }
 }
 
