@@ -67,7 +67,6 @@
 				7C25BC6527CD021C00E37F58 /* ContentView.swift */,
 				7C25BC6727CD021C00E37F58 /* Assets.xcassets */,
 				7C25BC6927CD021C00E37F58 /* Preview Content */,
-				7C387CA627D1FED0006B560D /* Store.swift */,
 			);
 			path = "expense-tracker";
 			sourceTree = "<group>";
@@ -93,6 +92,7 @@
 		7C387CA527D1FDEA006B560D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C387CA627D1FED0006B560D /* Store.swift */,
 				7C387CA227D1FDB7006B560D /* ExpenseItem.swift */,
 			);
 			path = Models;
