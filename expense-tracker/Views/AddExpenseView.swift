@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct AddExpenseView: View {
-    @State var title:String = "";
-    @State var amount:String = "";
+    @State private var title:String = ""
+    @State private var amount:Int = 0;
+    @State private var alertTitle:String = ""
+    @State private var showAlert:Bool = false
+    @EnvironmentObject var store:Store
+    
+    
+
     
     var body: some View {
-        VStack {
+        VStack (alignment: .leading) {
+            Text("Title")
             TextField("Title", text: $title)
                 .padding(.horizontal)
                 .frame(height:55)
                 .background(Color(red: 236/255, green: 234/255, blue: 236/255))
                 .cornerRadius(10)
-            TextField("Amount", text: $title)
+            Text("Amount")
+            TextField("Amount" ,value: $amount, formatter: NumberFormatter())
                 .padding(.horizontal)
                 .frame(height:55)
                 .background(Color(red: 236/255, green: 234/255, blue: 236/255))
@@ -32,14 +40,35 @@ struct AddExpenseView: View {
                     .cornerRadius(10)
                     .foregroundColor(.white)
             })
-        }.padding()
+            Spacer()
+        }.padding().alert(isPresented: $showAlert, content: getAlert)
       
+    }
+    
+    func saveButtonPressed () {
+        if checkInput() {
+            store.addItem(item: ExpenseItem(title:title, amount: amount))
+            title = ""
+            amount = 0
+        }
+     
+    }
+    
+    func checkInput () -> Bool {
+        if title.count < 1  && amount == 0 {
+            alertTitle = "Please enter title and amount."
+            showAlert.toggle()
+            return false
+        }
+        return true
+    }
+    
+    func getAlert () -> Alert {
+        return Alert(title: Text(alertTitle))
     }
 }
 
-func saveButtonPressed () {
-    print("hello")
-}
+
 
 struct AddExpenseView_Previews: PreviewProvider {
     static var previews: some View {

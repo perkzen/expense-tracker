@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct ExpenseListView: View {
+    @EnvironmentObject var store:Store
+    
     var body: some View {
-        Text("Expense List View")
+        VStack{
+            Text("Expenses").font(.largeTitle)
+            List{
+                ForEach(store.items) { item in
+                   ListRowView(item: item)
+               
+                }
+            }
+        }
+       
     }
 }
 
 struct ExpenseListView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseListView()
+        TabView{
+            ExpenseListView()
+        }.environmentObject(Store())
+   
     }
 }

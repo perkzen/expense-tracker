@@ -8,7 +8,7 @@
 import Foundation
 
 class Store: ObservableObject {
-    var items:[ExpenseItem] = []
+  @Published var items:[ExpenseItem] = []
     
     init() {
     
