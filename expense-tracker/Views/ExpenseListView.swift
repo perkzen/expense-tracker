@@ -13,11 +13,12 @@ struct ExpenseListView: View {
     var body: some View {
         VStack{
             Text("Expenses").font(.largeTitle)
+            Text("Balance: \(store.balance)$").font(.headline)
             List{
                 ForEach(store.items) { item in
                    ListRowView(item: item)
                
-                }
+                }.onDelete(perform: store.deleteItem)
             }
         }
        

@@ -25,7 +25,7 @@ struct AddExpenseView: View {
                 .frame(height:55)
                 .background(Color(red: 236/255, green: 234/255, blue: 236/255))
                 .cornerRadius(10)
-            Text("Amount")
+            Text("Amount ($)")
             TextField("Amount" ,value: $amount, formatter: NumberFormatter())
                 .padding(.horizontal)
                 .frame(height:55)
