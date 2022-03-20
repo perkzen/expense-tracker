@@ -9,14 +9,12 @@ import SwiftUI
 
 struct AddExpenseView: View {
     @State private var title:String = ""
-    @State private var amount:Int = 0;
+    @State private var amount = 0;
     @State private var alertTitle:String = ""
     @State private var showAlert:Bool = false
     @EnvironmentObject var store:ExpenseService
     @EnvironmentObject var authService:AuthService
-    
-    
-
+        
     
     var body: some View {
         VStack {
@@ -28,7 +26,7 @@ struct AddExpenseView: View {
                     .background(Color(red: 236/255, green: 234/255, blue: 236/255))
                     .cornerRadius(10)
                 Text("Amount ($)")
-                TextField("Amount" ,value: $amount, formatter: NumberFormatter())
+                TextField("0.00$" ,value: $amount, formatter: NumberFormatter())
                     .padding(.horizontal)
                     .frame(height:55)
                     .background(Color(red: 236/255, green: 234/255, blue: 236/255))

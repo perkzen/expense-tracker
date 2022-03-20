@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListRowView: View {
     var item:ExpenseItem
-    
+
     var body: some View {
         HStack {
             Rectangle().frame(width: 10, height: 50).foregroundColor(item.amount > 0 ? .green : .red)
