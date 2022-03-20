@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var store:Store = Store()
+    @StateObject var store:ExpenseService = ExpenseService()
+    @StateObject var authService:AuthService = AuthService()
     
     var body: some View {
         TabView{
@@ -22,7 +23,15 @@ struct ContentView: View {
                     Image(systemName: "plus.circle.fill")
                     Text("Add expense")
                 }
-        }.environmentObject(store)
+            AccountView()
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Account")
+                }
+        }
+        .environmentObject(store)
+        .environmentObject(authService)
+        
     }
 }
 

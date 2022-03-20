@@ -7,15 +7,13 @@
 
 import Foundation
 
-class Store: ObservableObject {
+class ExpenseService: ObservableObject {
     @Published var items:[ExpenseItem] = []
     @Published var balance:Int = 0
     @Published var income:Int = 0
     @Published var expenses:Int = 0
     
-    init() {
-        fetchItems()
-    }
+    init() {}
     
     func addItem (amount:Int, text:String) {
 
@@ -26,26 +24,25 @@ class Store: ObservableObject {
         let body: [String: AnyHashable] = [
             "amount": amount,
             "text": text,
-            "userId":2
+            "userId": getUserId()
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
         
-        let task = URLSession.shared.dataTask(with: request) { data,
+        URLSession.shared.dataTask(with: request) { data,
             _, error in
             guard let data = data, error == nil else {
                 return
             }
             do {
-                let res = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                if let expenseItem = res as? ExpenseItem {
-                    self.items.append(ExpenseItem(id: expenseItem.id, text: expenseItem.text, amount: expenseItem.amount))
+                let response = try JSONDecoder().decode(ExpenseItem.self, from: data)
+                DispatchQueue.main.async {
+                    self.items.append(response)
                 }
                 self.fetchItems()
-            }catch{
+            } catch {
                 print(error)
             }
-        }
-        task.resume()
+        }.resume()
         
     }
     
@@ -71,8 +68,9 @@ class Store: ObservableObject {
     }
     
     func fetchItems() {
-        guard let url = URL(string: "http://localhost:3000/expenses/user/2") else {return}
-        let task = URLSession.shared.dataTask(with: url) { [weak self]data,
+        
+        guard let url = URL(string: "http://localhost:3000/expenses/user/\(getUserId())") else {return}
+        URLSession.shared.dataTask(with: url) { [weak self]data,
             _, error in
             guard let data = data, error == nil else {
                 return
@@ -82,12 +80,20 @@ class Store: ObservableObject {
                 DispatchQueue.main.async {
                     self?.items = response
                 }
-            }catch{
+            } catch {
                 print(error)
             }
             
-        }
-        task.resume()
+        }.resume()
+    }
+    
+    func getUserId() ->Int {
+        guard
+            let data = UserDefaults.standard.data(forKey: "user"),
+            let userId:Int = try? JSONDecoder().decode(User.self, from: data).id
+        else { return -1 }
+        
+        return userId
     }
 
 }
