@@ -15,7 +15,7 @@ class AuthService: ObservableObject {
     
     init() {
         guard
-            let data = UserDefaults.standard.data(forKey: "user"),
+            let data = UserDefaults.standard.data(forKey: userKey),
             let user:User = try? JSONDecoder().decode(User.self, from: data)
         else { return }
         self.user = user
