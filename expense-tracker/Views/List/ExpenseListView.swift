@@ -15,10 +15,10 @@ struct ExpenseListView: View {
         VStack{
             Text("History").font(.largeTitle)
             VStack {
-                Text("Balance: \(expenseService.balance)$").font(.headline)
+                Text("Balance: \(getBalance())$").font(.headline)
                 HStack {
-                    Text("Income: \(expenseService.income)$").font(.headline)
-                    Text("Expenses: \(expenseService.expenses)$").font(.headline)
+                    Text("Income: \(getIncome())$").font(.headline)
+                    Text("Expenses: \(getExpenses())$").font(.headline)
                 }
             }
             
@@ -44,6 +44,34 @@ struct ExpenseListView: View {
         }
        
     }
+    func getBalance() ->Int {
+        var balance = 0
+        for item in expenseService.items {
+            balance += item.amount
+        }
+        return balance
+    }
+    
+    func getIncome()->Int {
+        var income = 0
+        for item in expenseService.items {
+            if item.amount > 0 {
+                income += item.amount
+            }
+        }
+        return income
+    }
+    
+    func getExpenses()->Int {
+        var expense = 0
+        for item in expenseService.items {
+            if item.amount < 0 {
+                expense += item.amount
+            }
+        }
+        return expense
+    }
+
 }
 
                                              

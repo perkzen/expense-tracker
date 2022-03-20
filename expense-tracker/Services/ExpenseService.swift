@@ -9,9 +9,6 @@ import Foundation
 
 class ExpenseService: ObservableObject {
     @Published var items:[ExpenseItem] = []
-    @Published var balance:Int = 0
-    @Published var income:Int = 0
-    @Published var expenses:Int = 0
     
     init() {}
     
@@ -38,7 +35,6 @@ class ExpenseService: ObservableObject {
                 DispatchQueue.main.async {
                     self.items.append(response)
                 }
-                self.fetchItems()
             } catch {
                 print(error)
             }
