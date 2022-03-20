@@ -13,7 +13,13 @@ class AuthService: ObservableObject {
     @Published var authError:String = ""
     let userKey:String = "user"
     
-    init() {}
+    init() {
+        guard
+            let data = UserDefaults.standard.data(forKey: "user"),
+            let user:User = try? JSONDecoder().decode(User.self, from: data)
+        else { return }
+        self.user = user
+    }
     
     
     func register(username:String, password:String) {
