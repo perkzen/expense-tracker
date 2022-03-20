@@ -13,7 +13,7 @@ struct ListRowView: View {
     var body: some View {
         HStack {
             Rectangle().frame(width: 10, height: 50).foregroundColor(item.amount > 0 ? .green : .red)
-            Text(item.title).padding(.horizontal)
+            Text(item.text).padding(.horizontal)
             Spacer()
             Text("\(item.amount)").padding(.horizontal)
         }
@@ -23,7 +23,7 @@ struct ListRowView: View {
 
 struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ListRowView(item:ExpenseItem(title: "School", amount: 100)).previewLayout(.sizeThatFits).padding()
-        ListRowView(item:ExpenseItem(title: "Kebab", amount: -100)).previewLayout(.sizeThatFits).padding()
+        ListRowView(item:ExpenseItem(id: 1,text: "School", amount: 100)).previewLayout(.sizeThatFits).padding()
+        ListRowView(item:ExpenseItem(id:2,text: "Kebab", amount: -100)).previewLayout(.sizeThatFits).padding()
     }
 }

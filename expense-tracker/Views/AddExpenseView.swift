@@ -47,7 +47,7 @@ struct AddExpenseView: View {
     
     func saveButtonPressed () {
         if checkInput() {
-            store.addItem(item: ExpenseItem(title:title, amount: amount))
+            store.addItem(amount: amount, text: title)
             title = ""
             amount = 0
         }

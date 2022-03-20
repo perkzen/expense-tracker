@@ -27,6 +27,7 @@ struct ExpenseListView: View {
                
                 }.onDelete(perform: store.deleteItem)
             }
+            
         }
        
     }

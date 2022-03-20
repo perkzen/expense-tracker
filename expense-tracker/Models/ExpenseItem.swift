@@ -9,13 +9,13 @@ import Foundation
 
 
 struct ExpenseItem:Identifiable,Hashable, Codable {
-    var id:String
-    var title:String
+    var id:Int
+    var text:String
     var amount:Int
     
-    init(title: String, amount:Int) {
-        self.id =  UUID().uuidString
-        self.title = title
+    init(id:Int,text: String, amount:Int) {
+        self.id = id
+        self.text = text
         self.amount = amount
     }
     
